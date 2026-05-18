@@ -51,11 +51,11 @@ export function PWAInstallPrompt() {
           exit={{ opacity: 0, y: 80 }}
           className="fixed bottom-6 left-4 right-4 z-50 max-w-sm mx-auto"
         >
-          <div className="bg-gray-900 border border-emerald-500/30 rounded-2xl p-4 shadow-2xl flex items-center gap-4">
+          <div className="bg-white dark:bg-gray-900 border border-emerald-500/30 rounded-2xl p-4 shadow-2xl flex items-center gap-4">
             <span className="text-3xl shrink-0">🌙</span>
             <div className="flex-1 min-w-0">
-              <p className="text-white font-semibold text-sm">Install Azan Noor</p>
-              <p className="text-white/40 text-xs">Add to home screen for offline access</p>
+              <p className="text-slate-900 dark:text-white font-semibold text-sm">Install Azan Noor</p>
+              <p className="text-slate-400 dark:text-white/40 text-xs">Add to home screen for offline access</p>
             </div>
             <div className="flex flex-col gap-2 shrink-0">
               <button
@@ -66,7 +66,7 @@ export function PWAInstallPrompt() {
               </button>
               <button
                 onClick={handleDismiss}
-                className="text-white/30 hover:text-white/60 text-xs text-center transition-colors"
+                className="text-slate-400 dark:text-white/30 hover:text-slate-600 dark:hover:text-white/60 text-xs text-center transition-colors"
               >
                 Later
               </button>
