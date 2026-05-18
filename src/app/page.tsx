@@ -66,8 +66,8 @@ export default function Home() {
         {/* ── Desktop two-column grid ───────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 items-start pb-16">
 
-          {/* ── Left sidebar (sticky on lg) ──────────────── */}
-          <div className="flex flex-col gap-6 lg:sticky lg:top-6">
+          {/* ── Left sidebar (sticky on lg) — below main content on mobile ── */}
+          <div className="flex flex-col gap-6 order-2 lg:order-1 lg:sticky lg:top-6">
             <IslamicClock
               timezone={location.timezone}
               hijriDate={hijriDate}
@@ -77,8 +77,8 @@ export default function Home() {
             <QiblaFinder coords={location.coords} />
           </div>
 
-          {/* ── Right main content ───────────────────────── */}
-          <div className="flex flex-col gap-6">
+          {/* ── Right main content — first on mobile ─────── */}
+          <div className="flex flex-col gap-6 order-1 lg:order-2">
 
             {/* Prayer Times */}
             <div>
