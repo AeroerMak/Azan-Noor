@@ -3,7 +3,9 @@
 import { motion } from 'framer-motion';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
+import { useAdhanAutoPlay } from '@/hooks/useAdhanAutoPlay';
 import { Header } from '@/components/ui/Header';
+import { AdhanBanner } from '@/components/azan/AdhanBanner';
 import { IslamicClock } from '@/components/clock/IslamicClock';
 import { PrayerSection } from '@/components/prayer/PrayerSection';
 import { AzanSection } from '@/components/azan/AzanSection';
@@ -15,6 +17,7 @@ import { isRamadan, getRamadanDay, getRamadanTimes } from '@/lib/utils/ramadan';
 export default function Home() {
   const location = useGeolocation();
   const prayerState = usePrayerTimes(location.coords);
+  const adhan = useAdhanAutoPlay(prayerState.prayers);
 
   const hijriDate = prayerState.data?.date.hijri ?? null;
   const ramadan = isRamadan(hijriDate);
@@ -44,6 +47,14 @@ export default function Home() {
             {location.error}
           </motion.div>
         )}
+
+        {/* Adhan auto-play banner */}
+        <AdhanBanner
+          prayerName={adhan.prayerName}
+          blocked={adhan.blocked}
+          onTapToPlay={adhan.tapToPlay}
+          onDismiss={adhan.dismiss}
+        />
 
         {/* Ramadan banner — full width above grid */}
         {ramadan && ramadanTimes && (
