@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AzanPlayer } from './AzanPlayer';
 
 const AZAN_LINES = [
   { arabic: 'اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ', transliteration: 'Allahu Akbar, Allahu Akbar', translation: 'Allah is the Greatest, Allah is the Greatest', repeat: 2 },
@@ -56,6 +57,11 @@ export function AzanSection() {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
+            {/* Audio player */}
+            <div className="px-5 pb-4">
+              <AzanPlayer />
+            </div>
+
             {/* View toggle */}
             <div className="px-5 pb-4 flex gap-2">
               {views.map(({ key, label }) => (

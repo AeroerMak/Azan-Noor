@@ -1,35 +1,44 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
+import { usePreferences } from '@/hooks/usePreferences';
 import { Header } from '@/components/ui/Header';
 import { IslamicClock } from '@/components/clock/IslamicClock';
 import { PrayerSection } from '@/components/prayer/PrayerSection';
 import { AzanSection } from '@/components/azan/AzanSection';
 import { DuaSection } from '@/components/dua/DuaSection';
 import { QiblaFinder } from '@/components/qibla/QiblaFinder';
-import type { Theme } from '@/types';
+import { RamadanBanner } from '@/components/ramadan/RamadanBanner';
+import { isRamadan, getRamadanDay, getRamadanTimes } from '@/lib/utils/ramadan';
 
 export default function Home() {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const { prefs, setTheme } = usePreferences();
   const location = useGeolocation();
   const prayerState = usePrayerTimes(location.coords);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('light', theme === 'light');
-  }, [theme]);
-
   const hijriDate = prayerState.data?.date.hijri ?? null;
+  const ramadan = isRamadan(hijriDate);
+  const ramadanDay = ramadan && hijriDate ? getRamadanDay(hijriDate) : 0;
+  const ramadanTimes = ramadan && prayerState.data ? getRamadanTimes(prayerState.data.timings) : null;
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('light', prefs.theme === 'light');
+  }, [prefs.theme]);
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-950' : 'bg-slate-100'}`}>
+    <div className={`min-h-screen transition-colors duration-300 ${prefs.theme === 'dark' ? 'bg-gray-950' : 'bg-slate-100'}`}>
       <div className="max-w-lg mx-auto px-4 pb-16">
         <Header
           prayers={prayerState.prayers}
-          theme={theme}
-          onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+          theme={prefs.theme}
+          onToggleTheme={() => setTheme(prefs.theme === 'dark' ? 'light' : 'dark')}
+          city={location.city}
+          isManual={location.isManual}
+          onSelectLocation={location.setManualLocation}
+          onClearLocation={location.clearManualLocation}
         />
 
         {/* Location error banner */}
@@ -44,6 +53,11 @@ export default function Home() {
         )}
 
         <div className="flex flex-col gap-6">
+          {/* Ramadan banner — shown only during Ramadan */}
+          {ramadan && ramadanTimes && (
+            <RamadanBanner day={ramadanDay} times={ramadanTimes} />
+          )}
+
           {/* Islamic Clock */}
           <IslamicClock
             timezone={location.timezone}
@@ -54,7 +68,7 @@ export default function Home() {
 
           {/* Prayer Times */}
           <div>
-            <h2 className={`text-xs font-semibold tracking-widest uppercase mb-3 ${theme === 'dark' ? 'text-white/30' : 'text-slate-400'}`}>
+            <h2 className={`text-xs font-semibold tracking-widest uppercase mb-3 ${prefs.theme === 'dark' ? 'text-white/30' : 'text-slate-400'}`}>
               Prayer Times
             </h2>
             <PrayerSection
@@ -67,7 +81,7 @@ export default function Home() {
             />
           </div>
 
-          {/* Azan */}
+          {/* Azan + Audio */}
           <AzanSection />
 
           {/* Dua Collection */}

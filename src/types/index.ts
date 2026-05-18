@@ -139,3 +139,11 @@ export interface NotificationSettings {
 }
 
 export type Theme = 'dark' | 'light';
+
+export interface Preferences {
+  theme: Theme;
+  calculationMethod: CalculationMethod;
+  notifications: NotificationSettings;
+  preferredMuezzin: string;
+  favoriteDuas: string[];
+}
