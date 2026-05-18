@@ -22,34 +22,34 @@ export function IslamicClock({ timezone, hijriDate, city, country }: IslamicCloc
     >
       {/* Location */}
       {city && (
-        <p className="text-sm text-white/40 mb-3 flex items-center justify-center gap-1">
+        <p className="text-sm text-white/40 mb-3 flex items-center justify-center gap-1.5">
           <span>📍</span>
-          <span>{city}{country ? `, ${country}` : ''}</span>
+          <span className="truncate">{city}{country ? `, ${country}` : ''}</span>
         </p>
       )}
 
       {/* Live clock */}
-      <p className="font-mono text-5xl font-bold text-white tabular-nums tracking-tight">
+      <p className="font-mono text-5xl lg:text-6xl font-bold text-white tabular-nums tracking-tight leading-none">
         {formatted}
       </p>
 
       {/* Gregorian date */}
-      <p className="text-white/50 text-sm mt-2">{date}</p>
+      <p className="text-white/50 text-sm mt-3">{date}</p>
 
       {/* Hijri date */}
       {hijriDate && (
-        <div className="mt-3 pt-3 border-t border-white/10">
+        <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-1">
           <p className="text-emerald-400 text-sm font-medium">
             {hijriDate.day} {hijriDate.month.en} {hijriDate.year} {hijriDate.designation.abbreviated}
           </p>
-          <p className="text-white/30 text-xs mt-0.5 font-arabic" dir="rtl">
+          <p className="text-white/30 text-sm font-arabic" dir="rtl">
             {hijriDate.day} {hijriDate.month.ar} {hijriDate.year} هـ
           </p>
         </div>
       )}
 
       {/* Timezone */}
-      <p className="text-white/20 text-xs mt-2">{timezone}</p>
+      <p className="text-white/20 text-xs mt-3">{timezone}</p>
     </motion.div>
   );
 }

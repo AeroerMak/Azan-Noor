@@ -37,22 +37,22 @@ export function PrayerSection({ prayers, nextPrayer, activePrayer, loading, erro
 
   return (
     <section>
-      {/* Countdown banner */}
+      {/* Countdown banner — full width */}
       {nextPrayer && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mb-6 rounded-2xl bg-gradient-to-r from-emerald-800/40 to-teal-800/40 border border-emerald-500/20 p-5 text-center"
+          className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-800/40 to-teal-800/40 border border-emerald-500/20 p-5 text-center"
         >
           <p className="text-sm text-white/50 mb-1">Next prayer — {nextPrayer.name}</p>
-          <p className="font-mono text-4xl font-bold text-emerald-400 tabular-nums tracking-wider">
+          <p className="font-mono text-4xl lg:text-5xl font-bold text-emerald-400 tabular-nums tracking-wider">
             {countdown}
           </p>
         </motion.div>
       )}
 
-      {/* Prayer time cards */}
-      <div className="flex flex-col gap-3">
+      {/* Prayer cards — 1 col on mobile, 2 col on sm+ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {prayers.map((prayer, i) => (
           <PrayerCard
             key={prayer.name}

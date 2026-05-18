@@ -40,25 +40,28 @@ export function DuaSection() {
 
   return (
     <section className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
-      <div className="p-5">
-        <div className="flex items-center gap-3 mb-5">
-          <span className="text-2xl">📿</span>
-          <div>
-            <h2 className="text-white font-semibold text-lg">Dua Collection</h2>
-            <p className="text-white/40 text-xs">Daily supplications with transliteration</p>
+      <div className="p-5 lg:p-6">
+        {/* Section header + search on same row for desktop */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="text-2xl">📿</span>
+            <div>
+              <h2 className="text-white font-semibold text-lg">Dua Collection</h2>
+              <p className="text-white/40 text-xs">Daily supplications with transliteration</p>
+            </div>
           </div>
-        </div>
 
-        {/* Search */}
-        <div className="relative mb-4">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">🔍</span>
-          <input
-            type="text"
-            placeholder="Search duas…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-emerald-500/50"
-          />
+          {/* Search — grows to fill remaining space on sm+ */}
+          <div className="relative sm:flex-1">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">🔍</span>
+            <input
+              type="text"
+              placeholder="Search duas…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-emerald-500/50"
+            />
+          </div>
         </div>
 
         {/* Category tabs */}
@@ -81,8 +84,8 @@ export function DuaSection() {
           </div>
         )}
 
-        {/* Dua list */}
-        <div className="flex flex-col gap-3">
+        {/* Dua cards — 1 col on mobile, 2 col on lg+ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((dua, i) => (
               <motion.div
@@ -92,7 +95,7 @@ export function DuaSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ delay: i * 0.04 }}
-                className="rounded-xl bg-white/5 border border-white/8 overflow-hidden"
+                className="rounded-xl bg-white/5 border border-white/8 overflow-hidden self-start"
               >
                 {/* Card header */}
                 <button
@@ -143,7 +146,9 @@ export function DuaSection() {
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <p className="text-center text-white/30 text-sm py-8">No duas found for &quot;{search}&quot;</p>
+            <p className="col-span-full text-center text-white/30 text-sm py-8">
+              No duas found for &quot;{search}&quot;
+            </p>
           )}
         </div>
       </div>

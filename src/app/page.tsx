@@ -28,20 +28,24 @@ export default function Home() {
     document.documentElement.classList.toggle('light', prefs.theme === 'light');
   }, [prefs.theme]);
 
+  const isDark = prefs.theme === 'dark';
+
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${prefs.theme === 'dark' ? 'bg-gray-950' : 'bg-slate-100'}`}>
-      <div className="max-w-lg mx-auto px-4 pb-16">
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-950' : 'bg-slate-100'}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Header ────────────────────────────────────── */}
         <Header
           prayers={prayerState.prayers}
           theme={prefs.theme}
-          onToggleTheme={() => setTheme(prefs.theme === 'dark' ? 'light' : 'dark')}
+          onToggleTheme={() => setTheme(isDark ? 'light' : 'dark')}
           city={location.city}
           isManual={location.isManual}
           onSelectLocation={location.setManualLocation}
           onClearLocation={location.clearManualLocation}
         />
 
-        {/* Location error banner */}
+        {/* Location error */}
         {location.error && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -52,46 +56,54 @@ export default function Home() {
           </motion.div>
         )}
 
-        <div className="flex flex-col gap-6">
-          {/* Ramadan banner — shown only during Ramadan */}
-          {ramadan && ramadanTimes && (
+        {/* Ramadan banner — full width above grid */}
+        {ramadan && ramadanTimes && (
+          <div className="mb-6">
             <RamadanBanner day={ramadanDay} times={ramadanTimes} />
-          )}
+          </div>
+        )}
 
-          {/* Islamic Clock */}
-          <IslamicClock
-            timezone={location.timezone}
-            hijriDate={hijriDate}
-            city={location.city}
-            country={location.country}
-          />
+        {/* ── Desktop two-column grid ───────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 items-start pb-16">
 
-          {/* Prayer Times */}
-          <div>
-            <h2 className={`text-xs font-semibold tracking-widest uppercase mb-3 ${prefs.theme === 'dark' ? 'text-white/30' : 'text-slate-400'}`}>
-              Prayer Times
-            </h2>
-            <PrayerSection
-              prayers={prayerState.prayers}
-              nextPrayer={prayerState.nextPrayer}
-              activePrayer={prayerState.activePrayer}
-              data={prayerState.data}
-              loading={prayerState.loading || location.loading}
-              error={prayerState.error}
+          {/* ── Left sidebar (sticky on lg) ──────────────── */}
+          <div className="flex flex-col gap-6 lg:sticky lg:top-6">
+            <IslamicClock
+              timezone={location.timezone}
+              hijriDate={hijriDate}
+              city={location.city}
+              country={location.country}
             />
+            <QiblaFinder coords={location.coords} />
           </div>
 
-          {/* Azan + Audio */}
-          <AzanSection />
+          {/* ── Right main content ───────────────────────── */}
+          <div className="flex flex-col gap-6">
 
-          {/* Dua Collection */}
-          <DuaSection />
+            {/* Prayer Times */}
+            <div>
+              <h2 className={`text-xs font-semibold tracking-widest uppercase mb-3 ${isDark ? 'text-white/30' : 'text-slate-400'}`}>
+                Prayer Times
+              </h2>
+              <PrayerSection
+                prayers={prayerState.prayers}
+                nextPrayer={prayerState.nextPrayer}
+                activePrayer={prayerState.activePrayer}
+                data={prayerState.data}
+                loading={prayerState.loading || location.loading}
+                error={prayerState.error}
+              />
+            </div>
 
-          {/* Qibla */}
-          <QiblaFinder coords={location.coords} />
+            {/* Azan + Audio */}
+            <AzanSection />
+
+            {/* Dua Collection */}
+            <DuaSection />
+          </div>
         </div>
 
-        <footer className="mt-12 text-center text-white/20 text-xs">
+        <footer className="pb-8 text-center text-white/20 text-xs">
           <p>Azan Noor · نور الأذان</p>
           <p className="mt-1">Prayer times via Aladhan API</p>
         </footer>

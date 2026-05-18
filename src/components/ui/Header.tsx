@@ -24,7 +24,7 @@ export function Header({ prayers, theme, onToggleTheme, city, isManual, onSelect
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between py-4 px-1"
+        className="flex items-center justify-between py-4 mb-6 border-b border-white/5"
       >
         <div className="flex items-center gap-2">
           <span className="text-2xl">🌙</span>
@@ -38,7 +38,7 @@ export function Header({ prayers, theme, onToggleTheme, city, isManual, onSelect
           {/* Location button */}
           <button
             onClick={() => setPickerOpen(true)}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors max-w-[120px]"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors max-w-[140px] sm:max-w-[200px]"
             title="Change location"
           >
             <span className="text-sm">📍</span>
