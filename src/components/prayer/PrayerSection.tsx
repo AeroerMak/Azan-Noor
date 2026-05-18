@@ -22,7 +22,7 @@ export function PrayerSection({ prayers, nextPrayer, activePrayer, loading, erro
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <Spinner className="w-10 h-10" />
-        <p className="text-slate-500 dark:text-white/50 text-sm">Fetching prayer times…</p>
+        <p className="text-white/50 text-sm">Fetching prayer times…</p>
       </div>
     );
   }
@@ -37,21 +37,19 @@ export function PrayerSection({ prayers, nextPrayer, activePrayer, loading, erro
 
   return (
     <section>
-      {/* Countdown banner — full width */}
       {nextPrayer && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-800/40 dark:to-teal-800/40 border border-emerald-300/50 dark:border-emerald-500/20 p-5 text-center"
+          className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-800/40 to-teal-800/40 border border-emerald-500/20 p-5 text-center"
         >
-          <p className="text-sm text-slate-500 dark:text-white/50 mb-1">Next prayer — {nextPrayer.name}</p>
-          <p className="font-mono text-4xl lg:text-5xl font-bold text-emerald-600 dark:text-emerald-400 tabular-nums tracking-wider">
+          <p className="text-sm text-white/50 mb-1">Next prayer — {nextPrayer.name}</p>
+          <p className="font-mono text-4xl lg:text-5xl font-bold text-emerald-400 tabular-nums tracking-wider">
             {countdown}
           </p>
         </motion.div>
       )}
 
-      {/* Prayer cards — 1 col on mobile, 2 col on sm+ */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {prayers.map((prayer, i) => (
           <PrayerCard

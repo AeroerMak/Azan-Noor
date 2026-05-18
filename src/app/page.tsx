@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
-import { usePreferences } from '@/hooks/usePreferences';
 import { Header } from '@/components/ui/Header';
 import { IslamicClock } from '@/components/clock/IslamicClock';
 import { PrayerSection } from '@/components/prayer/PrayerSection';
@@ -15,7 +13,6 @@ import { RamadanBanner } from '@/components/ramadan/RamadanBanner';
 import { isRamadan, getRamadanDay, getRamadanTimes } from '@/lib/utils/ramadan';
 
 export default function Home() {
-  const { prefs, setTheme } = usePreferences();
   const location = useGeolocation();
   const prayerState = usePrayerTimes(location.coords);
 
@@ -24,21 +21,13 @@ export default function Home() {
   const ramadanDay = ramadan && hijriDate ? getRamadanDay(hijriDate) : 0;
   const ramadanTimes = ramadan && prayerState.data ? getRamadanTimes(prayerState.data.timings) : null;
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', prefs.theme === 'dark');
-  }, [prefs.theme]);
-
-  const isDark = prefs.theme === 'dark';
-
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-950' : 'bg-slate-100'}`}>
+    <div className="min-h-screen bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ────────────────────────────────────── */}
         <Header
           prayers={prayerState.prayers}
-          theme={prefs.theme}
-          onToggleTheme={() => setTheme(isDark ? 'light' : 'dark')}
           city={location.city}
           isManual={location.isManual}
           onSelectLocation={location.setManualLocation}
@@ -82,7 +71,7 @@ export default function Home() {
 
             {/* Prayer Times */}
             <div>
-              <h2 className={`text-xs font-semibold tracking-widest uppercase mb-3 ${isDark ? 'text-white/30' : 'text-slate-400'}`}>
+              <h2 className="text-xs font-semibold tracking-widest uppercase mb-3 text-white/30">
                 Prayer Times
               </h2>
               <PrayerSection
@@ -103,7 +92,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="pb-8 text-center text-slate-300 dark:text-white/20 text-xs">
+        <footer className="pb-8 text-center text-white/20 text-xs">
           <p>Azan Noor · نور الأذان</p>
           <p className="mt-1">Prayer times via Aladhan API</p>
         </footer>

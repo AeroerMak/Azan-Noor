@@ -39,32 +39,29 @@ export function DuaSection() {
   }
 
   return (
-    <section className="rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 overflow-hidden">
+    <section className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
       <div className="p-5 lg:p-6">
-        {/* Section header + search on same row for desktop */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
           <div className="flex items-center gap-3 shrink-0">
             <span className="text-2xl">📿</span>
             <div>
-              <h2 className="text-slate-900 dark:text-white font-semibold text-lg">Dua Collection</h2>
-              <p className="text-slate-400 dark:text-white/40 text-xs">Daily supplications with transliteration</p>
+              <h2 className="text-white font-semibold text-lg">Dua Collection</h2>
+              <p className="text-white/40 text-xs">Daily supplications with transliteration</p>
             </div>
           </div>
 
-          {/* Search — grows to fill remaining space on sm+ */}
           <div className="relative sm:flex-1">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30">🔍</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">🔍</span>
             <input
               type="text"
               placeholder="Search duas…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 focus:outline-none focus:border-emerald-500/50"
+              className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-emerald-500/50"
             />
           </div>
         </div>
 
-        {/* Category tabs */}
         {!search && (
           <div className="flex flex-wrap gap-2 mb-5">
             {DUA_CATEGORIES.map(({ key, label, icon }) => (
@@ -74,7 +71,7 @@ export function DuaSection() {
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   activeCategory === key
                     ? 'bg-emerald-600 text-white'
-                    : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-white/50 hover:bg-slate-200 dark:hover:bg-white/10'
+                    : 'bg-white/5 text-white/50 hover:bg-white/10'
                 }`}
               >
                 <span>{icon}</span>
@@ -84,7 +81,6 @@ export function DuaSection() {
           </div>
         )}
 
-        {/* Dua cards — 1 col on mobile, 2 col on lg+ */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((dua, i) => (
@@ -95,14 +91,13 @@ export function DuaSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ delay: i * 0.04 }}
-                className="rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/8 overflow-hidden self-start"
+                className="rounded-xl bg-white/5 border border-white/8 overflow-hidden self-start"
               >
-                {/* Card header */}
                 <button
                   onClick={() => setExpandedId(expandedId === dua.id ? null : dua.id)}
-                  className="w-full flex items-start justify-between p-4 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                  className="w-full flex items-start justify-between p-4 text-left hover:bg-white/5 transition-colors"
                 >
-                  <p className="text-slate-700 dark:text-white/80 text-sm leading-relaxed flex-1 pr-4 line-clamp-2">
+                  <p className="text-white/80 text-sm leading-relaxed flex-1 pr-4 line-clamp-2">
                     {dua.translation}
                   </p>
                   <div className="flex items-center gap-2 shrink-0">
@@ -115,7 +110,7 @@ export function DuaSection() {
                     </button>
                     <motion.span
                       animate={{ rotate: expandedId === dua.id ? 90 : 0 }}
-                      className="text-slate-400 dark:text-white/30 text-lg leading-none"
+                      className="text-white/30 text-lg leading-none"
                     >
                       ›
                     </motion.span>
@@ -129,14 +124,14 @@ export function DuaSection() {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="border-t border-slate-200 dark:border-white/8"
+                      className="border-t border-white/8"
                     >
                       <div className="p-4 flex flex-col gap-3">
-                        <p className="text-2xl text-right font-arabic text-emerald-700 dark:text-emerald-200 leading-loose" dir="rtl">
+                        <p className="text-2xl text-right font-arabic text-emerald-200 leading-loose" dir="rtl">
                           {dua.arabic}
                         </p>
-                        <p className="text-slate-500 dark:text-white/50 text-sm italic">{dua.transliteration}</p>
-                        <p className="text-xs text-slate-400 dark:text-white/30">Source: {dua.source}</p>
+                        <p className="text-white/50 text-sm italic">{dua.transliteration}</p>
+                        <p className="text-xs text-white/30">Source: {dua.source}</p>
                       </div>
                     </motion.div>
                   )}
@@ -146,7 +141,7 @@ export function DuaSection() {
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <p className="col-span-full text-center text-slate-400 dark:text-white/30 text-sm py-8">
+            <p className="col-span-full text-center text-white/30 text-sm py-8">
               No duas found for &quot;{search}&quot;
             </p>
           )}
