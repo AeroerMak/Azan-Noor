@@ -8,13 +8,7 @@ pages_build_output_dir = ".vercel/output/static"
 [[d1_databases]]
 binding = "DB"
 database_name = "azan-noor-db"
-database_id = "YOUR_D1_DATABASE_ID"  # replace after: wrangler d1 create azan-noor-db
+database_id = "6550becf-65db-485c-9512-5049f695f40f"
 
 [vars]
 NEXT_PUBLIC_APP_URL = "https://azan-noor.pages.dev"
-
-# Setup steps:
-# 1. wrangler d1 create azan-noor-db          (get database_id)
-# 2. wrangler d1 execute azan-noor-db --file=cloudflare/schema.sql
-# 3. npm run build
-# 4. wrangler pages deploy .next/             (or connect via Cloudflare dashboard)
