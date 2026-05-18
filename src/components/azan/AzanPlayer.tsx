@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useAzanAudio } from '@/hooks/useAzanAudio';
-import { MUEZZIN_OPTIONS } from '@/data/azanAudio';
 
 function fmtTime(secs: number) {
   const m = Math.floor(secs / 60);
@@ -12,30 +11,18 @@ function fmtTime(secs: number) {
 
 export function AzanPlayer() {
   const { isPlaying, muezzin, volume, isLooping, currentTime, duration, error, canPlay,
-          play, pause, stop, setMuezzin, setVolume, toggleLoop } = useAzanAudio();
+          play, pause, stop, setVolume, toggleLoop } = useAzanAudio();
 
   return (
     <div className="rounded-xl bg-white/5 border border-white/8 p-4 flex flex-col gap-4">
-      <div className="flex flex-wrap gap-2">
-        {MUEZZIN_OPTIONS.map((m) => (
-          <button
-            key={m.id}
-            onClick={() => setMuezzin(m.id)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-              muezzin.id === m.id
-                ? 'bg-emerald-600 text-white'
-                : 'bg-white/5 text-white/50 hover:bg-white/10'
-            }`}
-          >
-            {m.name}
-          </button>
-        ))}
+      {/* Muezzin name */}
+      <div className="text-center">
+        <p className="text-white/60 text-xs mb-0.5">Reciter</p>
+        <p className="text-white font-medium text-sm">{muezzin.name}</p>
+        <p className="font-arabic text-base text-emerald-300 mt-1" dir="rtl">{muezzin.nameAr}</p>
       </div>
 
-      <p className="text-center font-arabic text-lg text-emerald-300" dir="rtl">
-        {muezzin.nameAr}
-      </p>
-
+      {/* Progress bar */}
       <div className="flex items-center gap-3 text-xs text-white/40">
         <span className="tabular-nums w-8 text-right">{fmtTime(currentTime)}</span>
         <div className="flex-1 relative h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -47,6 +34,7 @@ export function AzanPlayer() {
         <span className="tabular-nums w-8">{duration ? fmtTime(duration) : '--:--'}</span>
       </div>
 
+      {/* Controls */}
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={stop}
@@ -80,6 +68,7 @@ export function AzanPlayer() {
         </button>
       </div>
 
+      {/* Volume */}
       <div className="flex items-center gap-3">
         <span className="text-base">
           {volume === 0 ? '🔇' : volume < 0.5 ? '🔉' : '🔊'}
