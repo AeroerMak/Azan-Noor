@@ -97,7 +97,7 @@ export function DuaSection() {
                   onClick={() => setExpandedId(expandedId === dua.id ? null : dua.id)}
                   className="w-full flex items-start justify-between p-4 text-left hover:bg-white/5 transition-colors"
                 >
-                  <p className="text-white/80 text-sm leading-relaxed flex-1 pr-4 line-clamp-2">
+                  <p className="text-white/80 text-sm leading-relaxed flex-1 pr-4">
                     {dua.translation}
                   </p>
                   <div className="flex items-center gap-2 shrink-0">
