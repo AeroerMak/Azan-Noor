@@ -25,7 +25,7 @@ export default function Home() {
   const ramadanTimes = ramadan && prayerState.data ? getRamadanTimes(prayerState.data.timings) : null;
 
   useEffect(() => {
-    document.documentElement.classList.toggle('light', prefs.theme === 'light');
+    document.documentElement.classList.toggle('dark', prefs.theme === 'dark');
   }, [prefs.theme]);
 
   const isDark = prefs.theme === 'dark';
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="pb-8 text-center text-white/20 text-xs">
+        <footer className="pb-8 text-center text-slate-300 dark:text-white/20 text-xs">
           <p>Azan Noor · نور الأذان</p>
           <p className="mt-1">Prayer times via Aladhan API</p>
         </footer>

@@ -13,12 +13,12 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
   const { data, qiblaAngle, loading, error, compassSupported, compassHeading } = useQibla(coords);
 
   return (
-    <section className="rounded-2xl bg-white/5 border border-white/10 p-5">
+    <section className="rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-5">
       <div className="flex items-center gap-3 mb-5">
         <span className="text-2xl">🧭</span>
         <div>
-          <h2 className="text-white font-semibold text-lg">Qibla Direction</h2>
-          <p className="text-white/40 text-xs">Direction towards the Kaaba in Makkah</p>
+          <h2 className="text-slate-900 dark:text-white font-semibold text-lg">Qibla Direction</h2>
+          <p className="text-slate-400 dark:text-white/40 text-xs">Direction towards the Kaaba in Makkah</p>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
           {/* Compass rose */}
           <div className="relative w-48 h-48">
             {/* Outer ring */}
-            <div className="absolute inset-0 rounded-full border-2 border-white/10 bg-white/5" />
+            <div className="absolute inset-0 rounded-full border-2 border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5" />
 
             {/* Cardinal directions */}
             {['N', 'E', 'S', 'W'].map((dir, i) => {
@@ -49,7 +49,7 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
               return (
                 <span
                   key={dir}
-                  className="absolute text-xs font-bold text-white/30 -translate-x-1/2 -translate-y-1/2"
+                  className="absolute text-xs font-bold text-slate-400 dark:text-white/30 -translate-x-1/2 -translate-y-1/2"
                   style={{ left: x, top: y }}
                 >
                   {dir}
@@ -67,9 +67,9 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
                 {/* North end (green — points to Qibla) */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[60px] border-transparent border-b-emerald-400" />
                 {/* South end (dim) */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[60px] border-transparent border-t-white/20" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[60px] border-transparent border-t-slate-300 dark:border-t-white/20" />
                 {/* Center dot */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white/60 z-10" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-400 dark:bg-white/60 z-10" />
               </div>
             </motion.div>
 
@@ -81,13 +81,13 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
 
           {/* Data readout */}
           <div className="text-center space-y-1">
-            <p className="text-emerald-400 font-semibold text-2xl tabular-nums">
+            <p className="text-emerald-600 dark:text-emerald-400 font-semibold text-2xl tabular-nums">
               {data.direction.toFixed(1)}°
             </p>
-            <p className="text-white/50 text-sm">from North (true bearing)</p>
+            <p className="text-slate-500 dark:text-white/50 text-sm">from North (true bearing)</p>
 
             {compassSupported && compassHeading !== null ? (
-              <p className="text-white/30 text-xs mt-2">
+              <p className="text-slate-400 dark:text-white/30 text-xs mt-2">
                 Your heading: {compassHeading.toFixed(0)}° · Qibla offset: {qiblaAngle.toFixed(0)}°
               </p>
             ) : (

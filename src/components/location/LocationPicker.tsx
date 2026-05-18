@@ -56,25 +56,25 @@ export function LocationPicker({ currentCity, isManual, onSelect, onClear, onClo
         exit={{ opacity: 0, y: 60 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative z-10 w-full max-w-md bg-gray-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-md bg-white dark:bg-gray-900 border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-4">
-          <h3 className="text-white font-semibold text-base">Select Location</h3>
-          <button onClick={onClose} className="text-white/40 hover:text-white text-2xl leading-none">×</button>
+          <h3 className="text-slate-900 dark:text-white font-semibold text-base">Select Location</h3>
+          <button onClick={onClose} className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white text-2xl leading-none">×</button>
         </div>
 
         {/* Search input */}
         <div className="px-5 pb-4">
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">🔍</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30">🔍</span>
             <input
               ref={inputRef}
               type="text"
               placeholder="Search city or country…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-emerald-500/50"
+              className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl pl-9 pr-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 focus:outline-none focus:border-emerald-500/50"
             />
             {searching && (
               <span className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -90,12 +90,12 @@ export function LocationPicker({ currentCity, isManual, onSelect, onClear, onClo
             <div className="flex items-center justify-between rounded-xl bg-emerald-900/20 border border-emerald-500/20 px-4 py-3">
               <div>
                 <p className="text-xs text-emerald-400 mb-0.5">{isManual ? 'Manual location' : 'Detected location'}</p>
-                <p className="text-white text-sm font-medium">📍 {currentCity}</p>
+                <p className="text-slate-900 dark:text-white text-sm font-medium">📍 {currentCity}</p>
               </div>
               {isManual && (
                 <button
                   onClick={() => { onClear(); onClose(); }}
-                  className="text-xs text-white/40 hover:text-white border border-white/10 rounded-lg px-3 py-1.5 transition-colors"
+                  className="text-xs text-slate-500 dark:text-white/40 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 transition-colors"
                 >
                   Use auto-detect
                 </button>
@@ -115,20 +115,20 @@ export function LocationPicker({ currentCity, isManual, onSelect, onClear, onClo
                 exit={{ opacity: 0 }}
                 transition={{ delay: i * 0.04 }}
                 onClick={() => handleSelect(r)}
-                className="text-left rounded-xl bg-white/5 hover:bg-white/10 border border-white/8 px-4 py-3 transition-colors"
+                className="text-left rounded-xl bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/8 px-4 py-3 transition-colors"
               >
-                <p className="text-white text-sm font-medium">{r.city}{r.country ? `, ${r.country}` : ''}</p>
-                <p className="text-white/30 text-xs mt-0.5 line-clamp-1">{r.displayName}</p>
+                <p className="text-slate-900 dark:text-white text-sm font-medium">{r.city}{r.country ? `, ${r.country}` : ''}</p>
+                <p className="text-slate-400 dark:text-white/30 text-xs mt-0.5 line-clamp-1">{r.displayName}</p>
               </motion.button>
             ))}
           </AnimatePresence>
 
           {!searching && query.length >= 2 && results.length === 0 && (
-            <p className="text-center text-white/30 text-sm py-4">No results found for &quot;{query}&quot;</p>
+            <p className="text-center text-slate-400 dark:text-white/30 text-sm py-4">No results found for &quot;{query}&quot;</p>
           )}
 
           {query.length < 2 && (
-            <p className="text-center text-white/20 text-xs py-4">Type at least 2 characters to search</p>
+            <p className="text-center text-slate-300 dark:text-white/20 text-xs py-4">Type at least 2 characters to search</p>
           )}
         </div>
       </motion.div>

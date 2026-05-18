@@ -28,15 +28,15 @@ export function RamadanBanner({ day, times }: RamadanBannerProps) {
     <motion.section
       initial={{ opacity: 0, scale: 0.97 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="rounded-2xl overflow-hidden border border-amber-500/20 bg-gradient-to-br from-amber-950/60 to-orange-950/40"
+      className="rounded-2xl overflow-hidden border border-amber-500/20 bg-gradient-to-br from-amber-950/60 to-orange-950/40 dark:from-amber-950/60 dark:to-orange-950/40 from-amber-100 to-orange-100"
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-amber-500/10">
         <div className="flex items-center gap-2">
           <span className="text-xl">🌙</span>
           <div>
-            <p className="text-amber-300 font-bold text-base">رمضان مبارك</p>
-            <p className="text-amber-200/60 text-xs">Ramadan Day {day}</p>
+            <p className="text-amber-700 dark:text-amber-300 font-bold text-base">رمضان مبارك</p>
+            <p className="text-amber-600/60 dark:text-amber-200/60 text-xs">Ramadan Day {day}</p>
           </div>
         </div>
         <span className="text-2xl">✨</span>
@@ -56,13 +56,13 @@ export function RamadanBanner({ day, times }: RamadanBannerProps) {
 
       {/* Countdown */}
       <div className="px-5 py-4 text-center">
-        <p className="text-amber-200/50 text-xs mb-1">{phaseLabel}</p>
+        <p className="text-amber-600 dark:text-amber-200/50 text-xs mb-1">{phaseLabel}</p>
         {countdownTarget ? (
-          <p className="font-mono text-3xl font-bold text-amber-300 tabular-nums tracking-wider">
+          <p className="font-mono text-3xl font-bold text-amber-700 dark:text-amber-300 tabular-nums tracking-wider">
             {countdown}
           </p>
         ) : (
-          <p className="text-amber-300 text-sm font-medium">
+          <p className="text-amber-700 dark:text-amber-300 text-sm font-medium">
             May Allah accept your fast 🤲
           </p>
         )}

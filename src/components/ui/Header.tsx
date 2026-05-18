@@ -24,13 +24,13 @@ export function Header({ prayers, theme, onToggleTheme, city, isManual, onSelect
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between py-4 mb-6 border-b border-white/5"
+        className="flex items-center justify-between py-4 mb-6 border-b border-slate-200 dark:border-white/5"
       >
         <div className="flex items-center gap-2">
           <span className="text-2xl">🌙</span>
           <div>
-            <h1 className="text-white font-bold text-xl tracking-tight leading-none">Azan Noor</h1>
-            <p className="text-white/30 text-xs">نور الأذان</p>
+            <h1 className="text-slate-900 dark:text-white font-bold text-xl tracking-tight leading-none">Azan Noor</h1>
+            <p className="text-slate-400 dark:text-white/30 text-xs">نور الأذان</p>
           </div>
         </div>
 
@@ -38,11 +38,11 @@ export function Header({ prayers, theme, onToggleTheme, city, isManual, onSelect
           {/* Location button */}
           <button
             onClick={() => setPickerOpen(true)}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors max-w-[140px] sm:max-w-[200px]"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors max-w-[140px] sm:max-w-[200px]"
             title="Change location"
           >
             <span className="text-sm">📍</span>
-            <span className="text-white/60 text-xs truncate">
+            <span className="text-slate-500 dark:text-white/60 text-xs truncate">
               {city ?? 'Location'}
             </span>
             {isManual && <span className="text-emerald-400 text-[10px]">●</span>}
@@ -52,7 +52,7 @@ export function Header({ prayers, theme, onToggleTheme, city, isManual, onSelect
 
           <button
             onClick={onToggleTheme}
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-xl"
+            className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors text-xl"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? '☀️' : '🌙'}

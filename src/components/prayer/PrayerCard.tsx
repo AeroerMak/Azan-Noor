@@ -22,7 +22,7 @@ export function PrayerCard({ prayer, isActive, isNext, index }: PrayerCardProps)
           ? 'bg-emerald-600/20 border border-emerald-500/50 shadow-lg shadow-emerald-900/20'
           : isNext
           ? 'bg-amber-500/10 border border-amber-500/30'
-          : 'bg-white/5 border border-white/10 hover:bg-white/8'
+          : 'bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/8'
       }`}
     >
       {isActive && (
@@ -39,10 +39,10 @@ export function PrayerCard({ prayer, isActive, isNext, index }: PrayerCardProps)
       <div className="flex items-center gap-4">
         <span className="text-2xl">{PRAYER_ICONS[prayer.name]}</span>
         <div>
-          <p className={`font-semibold text-base ${isActive ? 'text-emerald-300' : isNext ? 'text-amber-300' : 'text-white'}`}>
+          <p className={`font-semibold text-base ${isActive ? 'text-emerald-300' : isNext ? 'text-amber-300' : 'text-slate-900 dark:text-white'}`}>
             {prayer.name}
           </p>
-          <p className="text-xs text-white/40 mt-0.5">
+          <p className="text-xs text-slate-400 dark:text-white/40 mt-0.5">
             {prayer.name === 'Fajr' && 'Pre-dawn prayer'}
             {prayer.name === 'Dhuhr' && 'Midday prayer'}
             {prayer.name === 'Asr' && 'Afternoon prayer'}
@@ -52,7 +52,7 @@ export function PrayerCard({ prayer, isActive, isNext, index }: PrayerCardProps)
         </div>
       </div>
 
-      <p className={`font-mono text-lg font-semibold tabular-nums ${isActive ? 'text-emerald-400' : isNext ? 'text-amber-400' : 'text-white/70'}`}>
+      <p className={`font-mono text-lg font-semibold tabular-nums ${isActive ? 'text-emerald-400' : isNext ? 'text-amber-400' : 'text-slate-600 dark:text-white/70'}`}>
         {format12h(prayer.time)}
       </p>
 

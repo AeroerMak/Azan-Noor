@@ -27,23 +27,23 @@ export function AzanSection() {
   ];
 
   return (
-    <section className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+    <section className="rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 overflow-hidden">
       {/* Header */}
       <button
         onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors"
+        className="w-full flex items-center justify-between p-5 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
       >
         <div className="flex items-center gap-3">
           <span className="text-2xl">🕌</span>
           <div className="text-left">
-            <h2 className="text-white font-semibold text-lg">The Azan</h2>
-            <p className="text-white/40 text-xs">Full call to prayer with translation</p>
+            <h2 className="text-slate-900 dark:text-white font-semibold text-lg">The Azan</h2>
+            <p className="text-slate-400 dark:text-white/40 text-xs">Full call to prayer with translation</p>
           </div>
         </div>
         <motion.span
           animate={{ rotate: expanded ? 180 : 0 }}
           transition={{ duration: 0.2 }}
-          className="text-white/40 text-xl"
+          className="text-slate-400 dark:text-white/40 text-xl"
         >
           ›
         </motion.span>
@@ -71,7 +71,7 @@ export function AzanSection() {
                   className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                     view === key
                       ? 'bg-emerald-600 text-white'
-                      : 'bg-white/5 text-white/50 hover:bg-white/10'
+                      : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-white/50 hover:bg-slate-200 dark:hover:bg-white/10'
                   }`}
                 >
                   {label}
@@ -87,24 +87,24 @@ export function AzanSection() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
-                  className="rounded-xl bg-white/5 p-4"
+                  className="rounded-xl bg-slate-50 dark:bg-white/5 p-4"
                 >
                   {view === 'arabic' && (
-                    <p className="text-2xl font-arabic text-right text-emerald-200 leading-loose" dir="rtl">
+                    <p className="text-2xl font-arabic text-right text-emerald-700 dark:text-emerald-200 leading-loose" dir="rtl">
                       {line.arabic}
-                      {line.repeat > 1 && <span className="text-white/30 text-lg mr-2"> ×{line.repeat}</span>}
+                      {line.repeat > 1 && <span className="text-slate-400 dark:text-white/30 text-lg mr-2"> ×{line.repeat}</span>}
                     </p>
                   )}
                   {view === 'transliteration' && (
-                    <p className="text-base text-white/80 italic">
+                    <p className="text-base text-slate-700 dark:text-white/80 italic">
                       {line.transliteration}
-                      {line.repeat > 1 && <span className="text-white/30 text-sm ml-2">(×{line.repeat})</span>}
+                      {line.repeat > 1 && <span className="text-slate-400 dark:text-white/30 text-sm ml-2">(×{line.repeat})</span>}
                     </p>
                   )}
                   {view === 'translation' && (
-                    <p className="text-base text-white/80">
+                    <p className="text-base text-slate-700 dark:text-white/80">
                       {line.translation}
-                      {line.repeat > 1 && <span className="text-white/30 text-sm ml-2">(×{line.repeat})</span>}
+                      {line.repeat > 1 && <span className="text-slate-400 dark:text-white/30 text-sm ml-2">(×{line.repeat})</span>}
                     </p>
                   )}
                 </motion.div>
