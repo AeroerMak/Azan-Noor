@@ -1,4 +1,5 @@
 import { type NextRequest } from 'next/server';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
@@ -16,11 +17,10 @@ interface PreferencesRow {
 
 function getDB(): D1Database | null {
   try {
-    // Available only when deployed to Cloudflare Pages
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ctx = (globalThis as any).__cf_pages_ctx__;
-    return ctx?.env?.DB ?? null;
+    const { env } = getRequestContext();
+    return (env as { DB?: D1Database }).DB ?? null;
   } catch {
+    // Not running on Cloudflare Pages — D1 unavailable
     return null;
   }
 }
