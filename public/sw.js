@@ -1,4 +1,4 @@
-const CACHE = 'azan-noor-v1';
+const CACHE = 'azan-noor-v2';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE = [
@@ -6,6 +6,10 @@ const PRECACHE = [
   '/offline.html',
   '/manifest.json',
   '/icons/icon.svg',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-maskable-512.png',
+  '/icons/apple-touch-icon.png',
 ];
 
 // Skip waiting and take control immediately
