@@ -52,7 +52,7 @@ export function PrayerBackground({ prayer }: PrayerBackgroundProps) {
                   top: glow.y,
                   width: glow.size,
                   height: glow.size,
-                  background: `radial-gradient(circle, ${glow.color}, transparent 70%)`,
+                  background: `radial-gradient(circle closest-side, ${glow.color}, transparent)`,
                 }}
                 animate={reduceMotion ? undefined : { x: [0, 40, -30, 0], y: [0, -30, 20, 0] }}
                 transition={{ duration: 30 + i * 8, repeat: Infinity, ease: 'easeInOut' }}
@@ -81,7 +81,7 @@ export function PrayerBackground({ prayer }: PrayerBackgroundProps) {
       </AnimatePresence>
 
       {/* Vignette keeps the edges dark and text readable */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgb(0_0_0/0.55))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgb(0_0_0/0.45))]" />
     </div>
   );
 }
