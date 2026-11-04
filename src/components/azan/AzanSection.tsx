@@ -27,7 +27,7 @@ export function AzanSection() {
   ];
 
   return (
-    <section className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+    <section className="rounded-2xl glass overflow-hidden">
       <button
         onClick={() => setExpanded((v) => !v)}
         className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors"

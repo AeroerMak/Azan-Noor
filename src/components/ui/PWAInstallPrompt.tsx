@@ -51,7 +51,7 @@ export function PWAInstallPrompt() {
           exit={{ opacity: 0, y: 80 }}
           className="fixed bottom-6 left-4 right-4 z-50 max-w-sm mx-auto"
         >
-          <div className="bg-gray-900 border border-emerald-500/30 rounded-2xl p-4 shadow-2xl flex items-center gap-4">
+          <div className="bg-gray-900/80 backdrop-blur-xl border border-emerald-500/30 rounded-2xl p-4 shadow-2xl flex items-center gap-4">
             <span className="text-3xl shrink-0">🌙</span>
             <div className="flex-1 min-w-0">
               <p className="text-white font-semibold text-sm">Install Azan Noor</p>

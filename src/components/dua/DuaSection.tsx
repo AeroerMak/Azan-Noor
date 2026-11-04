@@ -39,7 +39,7 @@ export function DuaSection() {
   }
 
   return (
-    <section className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+    <section className="rounded-2xl glass overflow-hidden">
       <div className="p-5 lg:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
           <div className="flex items-center gap-3 shrink-0">

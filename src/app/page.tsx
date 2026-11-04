@@ -5,6 +5,7 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 import { useAdhanAutoPlay } from '@/hooks/useAdhanAutoPlay';
 import { Header } from '@/components/ui/Header';
+import { PrayerBackground } from '@/components/ui/PrayerBackground';
 import { AdhanBanner } from '@/components/azan/AdhanBanner';
 import { IslamicClock } from '@/components/clock/IslamicClock';
 import { PrayerSection } from '@/components/prayer/PrayerSection';
@@ -25,8 +26,10 @@ export default function Home() {
   const ramadanTimes = ramadan && prayerState.data ? getRamadanTimes(prayerState.data.timings) : null;
 
   return (
-    <div className="min-h-screen bg-gray-950">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen">
+      <PrayerBackground prayer={prayerState.activePrayer?.name ?? null} />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ────────────────────────────────────── */}
         <Header

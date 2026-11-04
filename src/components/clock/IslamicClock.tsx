@@ -18,7 +18,7 @@ export function IslamicClock({ timezone, hijriDate, city, country }: IslamicCloc
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl bg-white/5 border border-white/10 p-6 text-center"
+      className="rounded-2xl glass p-6 text-center"
     >
       {city && (
         <p className="text-sm text-white/40 mb-3 flex items-center justify-center gap-1.5">

@@ -41,7 +41,7 @@ export function PrayerSection({ prayers, nextPrayer, activePrayer, loading, erro
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-800/40 to-teal-800/40 border border-emerald-500/20 p-5 text-center"
+          className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-800/40 to-teal-800/40 border border-emerald-500/20 backdrop-blur-xl p-5 text-center"
         >
           <p className="text-sm text-white/50 mb-1">Next prayer — {nextPrayer.name}</p>
           <p className="font-mono text-4xl lg:text-5xl font-bold text-emerald-400 tabular-nums tracking-wider">

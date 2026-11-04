@@ -34,7 +34,7 @@ export function NotificationPanel({ prayers }: NotificationPanelProps) {
               initial={{ opacity: 0, scale: 0.95, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -8 }}
-              className="absolute right-0 top-12 z-20 w-72 rounded-2xl bg-gray-900 border border-white/10 shadow-2xl p-4"
+              className="absolute right-0 top-12 z-20 w-72 rounded-2xl bg-gray-900/80 backdrop-blur-xl border border-white/10 shadow-2xl p-4"
             >
               <h3 className="text-white font-semibold mb-4">Prayer Notifications</h3>
 

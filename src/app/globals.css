@@ -40,3 +40,27 @@ button {
 @utility bg-white\/8 {
   background-color: rgb(255 255 255 / 0.08);
 }
+
+/* Frosted glass card — lets the prayer-time background glow through */
+@utility glass {
+  background-color: rgb(255 255 255 / 0.05);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+/* Twinkling stars for Fajr / Maghrib / Isha backgrounds */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+.star {
+  animation: twinkle 4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .star {
+    animation: none;
+    opacity: 0.6;
+  }
+}

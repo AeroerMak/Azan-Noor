@@ -28,7 +28,7 @@ export function RamadanBanner({ day, times }: RamadanBannerProps) {
     <motion.section
       initial={{ opacity: 0, scale: 0.97 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="rounded-2xl overflow-hidden border border-amber-500/20 bg-gradient-to-br from-amber-950/60 to-orange-950/40"
+      className="rounded-2xl overflow-hidden border border-amber-500/20 bg-gradient-to-br from-amber-950/60 to-orange-950/40 backdrop-blur-xl"
     >
       <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-amber-500/10">
         <div className="flex items-center gap-2">

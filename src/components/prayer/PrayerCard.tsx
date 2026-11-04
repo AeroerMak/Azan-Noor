@@ -19,10 +19,10 @@ export function PrayerCard({ prayer, isActive, isNext, index }: PrayerCardProps)
       transition={{ delay: index * 0.07, duration: 0.4 }}
       className={`relative flex items-center justify-between rounded-2xl px-5 py-4 transition-all duration-300 ${
         isActive
-          ? 'bg-emerald-600/20 border border-emerald-500/50 shadow-lg shadow-emerald-900/20'
+          ? 'bg-emerald-600/20 border border-emerald-500/50 shadow-lg shadow-emerald-900/20 backdrop-blur-xl'
           : isNext
-          ? 'bg-amber-500/10 border border-amber-500/30'
-          : 'bg-white/5 border border-white/10 hover:bg-white/8'
+          ? 'bg-amber-500/10 border border-amber-500/30 backdrop-blur-xl'
+          : 'glass hover:bg-white/8'
       }`}
     >
       {isActive && (

@@ -18,7 +18,7 @@ export function AdhanBanner({ prayerName, blocked, onTapToPlay, onDismiss }: Adh
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-          className="mb-5 rounded-2xl bg-gradient-to-r from-emerald-900/60 to-teal-900/60 border border-emerald-500/30 px-5 py-4 flex items-center gap-4"
+          className="mb-5 rounded-2xl bg-gradient-to-r from-emerald-900/60 to-teal-900/60 backdrop-blur-xl border border-emerald-500/30 px-5 py-4 flex items-center gap-4"
         >
           <span className="text-3xl shrink-0">🕌</span>
 

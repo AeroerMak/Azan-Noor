@@ -13,7 +13,7 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
   const { data, qiblaAngle, loading, error, compassSupported, compassHeading } = useQibla(coords);
 
   return (
-    <section className="rounded-2xl bg-white/5 border border-white/10 p-5">
+    <section className="rounded-2xl glass p-5">
       <div className="flex items-center gap-3 mb-5">
         <span className="text-2xl">🧭</span>
         <div>

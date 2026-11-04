@@ -54,7 +54,7 @@ export function LocationPicker({ currentCity, isManual, onSelect, onClear, onClo
         exit={{ opacity: 0, y: 60 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative z-10 w-full max-w-md bg-gray-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-md bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
       >
         <div className="flex items-center justify-between px-5 pt-5 pb-4">
           <h3 className="text-white font-semibold text-base">Select Location</h3>
