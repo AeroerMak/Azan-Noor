@@ -48,7 +48,7 @@ export function NotificationPanel({ notifications }: NotificationPanelProps) {
 }
 
 export function NotificationSettingsForm({ notifications }: NotificationPanelProps) {
-  const { settings, permission, requestPermission, updateSettings, native, exactAlarm, fixExactAlarm } = notifications;
+  const { settings, permission, requestPermission, updateSettings, native, exactAlarm, fixExactAlarm, testAdhan } = notifications;
 
   return (
     <>
@@ -108,6 +108,7 @@ export function NotificationSettingsForm({ notifications }: NotificationPanelPro
               {settings.reminder && (
                 <MinutesPicker value={settings.minutesBefore} onChange={(min) => updateSettings({ minutesBefore: min })} />
               )}
+              {settings.adhan && <TestAdhanButton onTest={testAdhan} />}
             </>
           )}
         </>
@@ -152,6 +153,26 @@ function ToggleRow({ label, on, onToggle, last }: { label: string; on: boolean; 
         <span className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${on ? 'left-6' : 'left-1'}`} />
       </button>
     </div>
+  );
+}
+
+function TestAdhanButton({ onTest }: { onTest: () => Promise<void> }) {
+  const [sent, setSent] = useState(false);
+
+  async function handleClick() {
+    await onTest();
+    setSent(true);
+    setTimeout(() => setSent(false), 8000);
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={sent}
+      className="w-full mt-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 text-sm font-medium transition-colors disabled:opacity-60"
+    >
+      {sent ? 'Adhan plays in 5 seconds — you can lock your phone' : '▶ Test Adhan notification'}
+    </button>
   );
 }
 

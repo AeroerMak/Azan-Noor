@@ -13,6 +13,7 @@ const SMALL_ICON = 'ic_stat_azan';
 
 // id = day * 10 + prayer index (adhan) and + 1000 for reminders
 const REMINDER_OFFSET = 1000;
+const TEST_ID = 9999;
 
 export const isNative = () => Capacitor.isNativePlatform();
 
@@ -36,9 +37,9 @@ export async function scheduleAdhan(coords: Coordinates, settings: NotificationS
   if (!isNative()) return;
   await ensureChannel();
 
-  const pending = await LocalNotifications.getPending();
-  if (pending.notifications.length) {
-    await LocalNotifications.cancel({ notifications: pending.notifications.map((n) => ({ id: n.id })) });
+  const pending = (await LocalNotifications.getPending()).notifications.filter((n) => n.id !== TEST_ID);
+  if (pending.length) {
+    await LocalNotifications.cancel({ notifications: pending.map((n) => ({ id: n.id })) });
   }
   if (!settings.enabled) return;
 
@@ -80,6 +81,24 @@ export async function scheduleAdhan(coords: Coordinates, settings: NotificationS
   }
 
   if (notifications.length) await LocalNotifications.schedule({ notifications });
+}
+
+// Lets the user hear the Adhan notification (sound, volume, lock screen) right away
+export async function scheduleTestAdhan() {
+  if (!isNative()) return;
+  await ensureChannel();
+  await LocalNotifications.schedule({
+    notifications: [{
+      id: TEST_ID,
+      title: '🕌 Test Adhan',
+      body: 'This is how the Adhan will sound at prayer time',
+      schedule: { at: new Date(Date.now() + 5000), allowWhileIdle: true },
+      channelId: ADHAN_CHANNEL,
+      sound: ADHAN_SOUND,
+      smallIcon: SMALL_ICON,
+      iconColor: '#10b981',
+    }],
+  });
 }
 
 export async function checkNativePermission(): Promise<NotificationPermission> {

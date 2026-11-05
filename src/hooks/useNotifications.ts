@@ -9,6 +9,7 @@ import {
   requestNativePermission,
   hasExactAlarms,
   openExactAlarmSettings,
+  scheduleTestAdhan,
 } from '@/lib/native/adhanScheduler';
 
 const STORAGE_KEY = 'azan-noor-notifications';
@@ -111,5 +112,5 @@ export function useNotifications(prayers: PrayerTime[], coords: Coordinates | nu
     return () => timers.forEach(clearTimeout);
   }, [native, settings, permission, prayers]);
 
-  return { settings, permission, requestPermission, updateSettings, native, exactAlarm, fixExactAlarm };
+  return { settings, permission, requestPermission, updateSettings, native, exactAlarm, fixExactAlarm, testAdhan: scheduleTestAdhan };
 }
