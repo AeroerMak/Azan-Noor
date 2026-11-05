@@ -58,7 +58,21 @@ button {
 .star {
   animation: twinkle 4s ease-in-out infinite;
 }
+/* Mobile tab switch — panel fades up when it becomes visible */
+@keyframes tab-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 1023.98px) {
+  .tab-panel {
+    animation: tab-in 0.25s ease-out;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .tab-panel {
+    animation: none;
+  }
   .star {
     animation: none;
     opacity: 0.6;

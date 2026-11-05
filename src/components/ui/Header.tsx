@@ -1,65 +1,49 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import type { PrayerTime, Coordinates } from '@/types';
+import { motion } from 'framer-motion';
+import type { useNotifications } from '@/hooks/useNotifications';
 import { NotificationPanel } from '@/components/notifications/NotificationPanel';
-import { LocationPicker } from '@/components/location/LocationPicker';
 
 interface HeaderProps {
-  prayers: PrayerTime[];
+  notifications: ReturnType<typeof useNotifications>;
   city: string | null;
   isManual: boolean;
-  onSelectLocation: (coords: Coordinates, city: string, country: string) => void;
-  onClearLocation: () => void;
+  onOpenLocation: () => void;
 }
 
-export function Header({ prayers, city, isManual, onSelectLocation, onClearLocation }: HeaderProps) {
-  const [pickerOpen, setPickerOpen] = useState(false);
-
+export function Header({ notifications, city, isManual, onOpenLocation }: HeaderProps) {
   return (
-    <>
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between py-4 mb-6 border-b border-white/5"
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🌙</span>
-          <div>
-            <h1 className="text-white font-bold text-xl tracking-tight leading-none">Azan Noor</h1>
-            <p className="text-white/30 text-xs">نور الأذان</p>
-          </div>
+    <motion.header
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-center justify-between py-4 mb-4 lg:mb-6 border-b border-white/5"
+    >
+      <div className="flex items-center gap-2">
+        <span className="text-2xl">🌙</span>
+        <div>
+          <h1 className="text-white font-bold text-xl tracking-tight leading-none">Azan Noor</h1>
+          <p className="text-white/30 text-xs">نور الأذان</p>
         </div>
+      </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setPickerOpen(true)}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors max-w-[140px] sm:max-w-[200px]"
-            title="Change location"
-          >
-            <span className="text-sm">📍</span>
-            <span className="text-white/60 text-xs truncate">
-              {city ?? 'Location'}
-            </span>
-            {isManual && <span className="text-emerald-400 text-[10px]">●</span>}
-          </button>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onOpenLocation}
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors max-w-[160px] sm:max-w-[200px]"
+          title="Change location"
+        >
+          <span className="text-sm">📍</span>
+          <span className="text-white/60 text-xs truncate">
+            {city ?? 'Location'}
+          </span>
+          {isManual && <span className="text-emerald-400 text-[10px]">●</span>}
+        </button>
 
-          <NotificationPanel prayers={prayers} />
+        {/* On mobile notifications live in the Settings tab */}
+        <div className="hidden lg:block">
+          <NotificationPanel notifications={notifications} />
         </div>
-      </motion.header>
-
-      <AnimatePresence>
-        {pickerOpen && (
-          <LocationPicker
-            currentCity={city}
-            isManual={isManual}
-            onSelect={onSelectLocation}
-            onClear={onClearLocation}
-            onClose={() => setPickerOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-    </>
+      </div>
+    </motion.header>
   );
 }

@@ -49,7 +49,7 @@ export function PWAInstallPrompt() {
           initial={{ opacity: 0, y: 80 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 80 }}
-          className="fixed bottom-6 left-4 right-4 z-50 max-w-sm mx-auto"
+          className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] lg:bottom-6 left-4 right-4 z-50 max-w-sm mx-auto"
         >
           <div className="bg-gray-900/80 backdrop-blur-xl border border-emerald-500/30 rounded-2xl p-4 shadow-2xl flex items-center gap-4">
             <span className="text-3xl shrink-0">🌙</span>

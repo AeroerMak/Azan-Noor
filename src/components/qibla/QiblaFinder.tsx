@@ -34,7 +34,8 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
 
       {data && !loading && (
         <div className="flex flex-col items-center gap-6">
-          <div className="relative w-48 h-48">
+          {/* Scaled up on mobile, where Qibla has its own tab */}
+          <div className="relative w-48 h-48 max-lg:scale-125 max-lg:my-6">
             <div className="absolute inset-0 rounded-full border-2 border-white/10 bg-white/5" />
 
             {['N', 'E', 'S', 'W'].map((dir, i) => {
@@ -86,6 +87,9 @@ export function QiblaFinder({ coords }: QiblaFinderProps) {
                 Enable device compass for live tracking
               </p>
             )}
+            <p className="lg:hidden text-white/30 text-xs mt-1">
+              Hold your phone flat, away from metal objects
+            </p>
           </div>
         </div>
       )}
