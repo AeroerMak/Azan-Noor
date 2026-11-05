@@ -10,7 +10,9 @@
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static --project-name azan-noor",
     "build:mobile": "node scripts/build-mobile.mjs",
-    "android:open": "npx cap open android"
+    "android:open": "npx cap open android",
+    "release:android": "node scripts/release-android.mjs",
+    "landing:deploy": "wrangler pages deploy landing --project-name azannoor-landing --branch main"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.3",
