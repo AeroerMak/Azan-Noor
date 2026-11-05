@@ -11,4 +11,4 @@ database_name = "azan-noor-db"
 database_id = "6550becf-65db-485c-9512-5049f695f40f"
 
 [vars]
-NEXT_PUBLIC_APP_URL = "https://azan-noor.pages.dev"
+NEXT_PUBLIC_APP_URL = "https://azannoor.app"
