@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Privacy Policy — Azan Noor</title>
+  <meta name="description" content="How Azan Noor handles your data: no account, no ads, no analytics. Your location stays on your device.">
+  <meta name="theme-color" content="#030712">
+  <link rel="canonical" href="https://azannoor.app/privacy/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-vibe="Isha">
+  <div class="sky" aria-hidden="true"><div class="glow"></div><div class="stars"></div><div class="vignette"></div></div>
+
+  <header class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a class="brand" href="/"><img src="/images/icon-192.png" alt="" width="34" height="34">Azan Noor</a>
+        <nav class="nav-links"><a class="btn btn-ghost" href="/">Back to home</a></nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="legal glass" style="margin-top:32px">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: 5 November 2026</p>
+
+      <p>Azan Noor (“the app”) is available as an Android app and as a web app at <a href="https://app.azannoor.app">app.azannoor.app</a>. We built it to be private by design: <strong>there is no account, no advertising and no analytics</strong>, and we do not sell or share personal data.</p>
+
+      <h2>Location</h2>
+      <p>With your permission, the app uses your device's location — or a city you choose manually — to calculate prayer times and the Qibla direction. <strong>Prayer times are calculated on your device.</strong> We do not collect or store your location on our servers.</p>
+      <p>To show extra information, the app sends your approximate coordinates directly from your device to these services:</p>
+      <ul>
+        <li><strong>Aladhan</strong> (api.aladhan.com) — for the Hijri date, Ramadan times and the Qibla bearing.</li>
+        <li><strong>OpenStreetMap Nominatim</strong> (nominatim.openstreetmap.org) — to show your city name, and to search when you pick a city manually.</li>
+      </ul>
+      <p>These services receive your coordinates (or search text) and your IP address as part of the request, and handle it under their own privacy policies.</p>
+
+      <h2>Notifications</h2>
+      <p>On Android, the Adhan and prayer reminders are scheduled locally on your phone. No notification data passes through our servers.</p>
+
+      <h2>Data stored on your device</h2>
+      <p>Your settings — notification preferences, chosen location, Adhan voice and favourite duas — are stored only on your device. Uninstalling the app or clearing site data removes them.</p>
+
+      <h2>Fonts and hosting</h2>
+      <ul>
+        <li>The app and this website load fonts from <strong>Google Fonts</strong>, which receives your IP address when the fonts are downloaded.</li>
+        <li>This website, the web app and the APK download are hosted on <strong>Cloudflare</strong>, which processes standard request data (such as IP address) to deliver and protect the service.</li>
+      </ul>
+
+      <h2>Permissions (Android)</h2>
+      <ul>
+        <li><strong>Location</strong> — to calculate prayer times and the Qibla direction.</li>
+        <li><strong>Notifications</strong> and <strong>alarms &amp; reminders</strong> — to play the Adhan and reminders on time.</li>
+        <li><strong>Internet</strong> — for the services listed above.</li>
+        <li><strong>Run at startup</strong> — to restore your scheduled Adhan after the phone restarts.</li>
+      </ul>
+
+      <h2>Children</h2>
+      <p>The app is suitable for all ages and does not knowingly collect personal information from anyone, including children.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, we will update this page and the date above.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about privacy? Email <a href="mailto:contact@azannoor.app">contact@azannoor.app</a>.</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <a class="brand" href="/"><img src="/images/icon-192.png" alt="" width="28" height="28">Azan Noor</a>
+      <nav><a href="/#download">Download</a><a href="https://app.azannoor.app">Web app</a><a href="/privacy/">Privacy</a></nav>
+      <p>© <span data-year>2026</span> Azan Noor</p>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var box = document.querySelector('.sky .stars');
+      for (var i = 0; i < 60; i++) {
+        var s = document.createElement('span');
+        s.style.left = (i * 37.7) % 100 + '%';
+        s.style.top = ((i * 61.3) % 100) * 0.8 + '%';
+        s.style.animationDelay = (i % 10) * 0.6 + 's';
+        box.appendChild(s);
+      }
+      document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+    })();
+  </script>
+</body>
+</html>
