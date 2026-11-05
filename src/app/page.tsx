@@ -21,12 +21,16 @@ import { RamadanBanner } from '@/components/ramadan/RamadanBanner';
 import { LocationPicker } from '@/components/location/LocationPicker';
 import { NotificationSettingsForm } from '@/components/notifications/NotificationPanel';
 import { isRamadan, getRamadanDay, getRamadanTimes } from '@/lib/utils/ramadan';
+import type { PrayerTime } from '@/types';
+
+const NO_PRAYERS: PrayerTime[] = [];
 
 export default function Home() {
   const location = useGeolocation();
   const prayerState = usePrayerTimes(location.coords);
-  const adhan = useAdhanAutoPlay(prayerState.prayers);
-  const notifications = useNotifications(prayerState.prayers);
+  const notifications = useNotifications(prayerState.prayers, location.coords);
+  // In the native app the OS notification plays the Adhan, so skip in-app auto-play
+  const adhan = useAdhanAutoPlay(notifications.native ? NO_PRAYERS : prayerState.prayers);
   const { tab, setTab } = useTab();
   const [pickerOpen, setPickerOpen] = useState(false);
 
@@ -141,7 +145,9 @@ export default function Home() {
                   <span className="text-2xl">{notifications.settings.enabled ? '🔔' : '🔕'}</span>
                   <div>
                     <h3 className="text-white font-semibold">Prayer Notifications</h3>
-                    <p className="text-white/40 text-xs">Reminders before each prayer</p>
+                    <p className="text-white/40 text-xs">
+                      {notifications.native ? 'Adhan and reminders for each prayer' : 'Reminders before each prayer'}
+                    </p>
                   </div>
                 </div>
                 <NotificationSettingsForm notifications={notifications} />

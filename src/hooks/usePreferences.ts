@@ -9,7 +9,7 @@ const STORAGE_KEY = 'azan-noor-prefs';
 const DEFAULT_PREFS: Preferences = {
   theme: 'dark',
   calculationMethod: 4,
-  notifications: { enabled: false, minutesBefore: 10, soundEnabled: true },
+  notifications: { enabled: false, minutesBefore: 10, soundEnabled: true, adhan: true, reminder: false },
   preferredMuezzin: 'alafasy',
   favoriteDuas: [],
 };

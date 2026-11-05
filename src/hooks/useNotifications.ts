@@ -1,40 +1,59 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import type { PrayerTime, NotificationSettings } from '@/types';
+import type { PrayerTime, NotificationSettings, Coordinates } from '@/types';
+import {
+  isNative,
+  scheduleAdhan,
+  checkNativePermission,
+  requestNativePermission,
+  hasExactAlarms,
+  openExactAlarmSettings,
+} from '@/lib/native/adhanScheduler';
 
 const STORAGE_KEY = 'azan-noor-notifications';
 
+const DEFAULTS: NotificationSettings = {
+  enabled: false,
+  minutesBefore: 10,
+  soundEnabled: true,
+  adhan: true,
+  reminder: false,
+};
+
 function loadSettings(): NotificationSettings {
-  if (typeof window === 'undefined') return { enabled: false, minutesBefore: 10, soundEnabled: true };
+  if (typeof window === 'undefined') return DEFAULTS;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : { enabled: false, minutesBefore: 10, soundEnabled: true };
+    return raw ? { ...DEFAULTS, ...JSON.parse(raw) } : DEFAULTS;
   } catch {
-    return { enabled: false, minutesBefore: 10, soundEnabled: true };
+    return DEFAULTS;
   }
 }
 
-export function useNotifications(prayers: PrayerTime[]) {
+export function useNotifications(prayers: PrayerTime[], coords: Coordinates | null) {
   const [settings, setSettings] = useState<NotificationSettings>(loadSettings);
   const [permission, setPermission] = useState<NotificationPermission>('default');
+  const [exactAlarm, setExactAlarm] = useState(true);
+  // Detected after mount — the page is pre-rendered without Capacitor
+  const [native, setNative] = useState(false);
+
+  useEffect(() => setNative(isNative()), []);
 
   useEffect(() => {
-    if ('Notification' in window) setPermission(Notification.permission);
-  }, []);
-
-  const requestPermission = useCallback(async () => {
-    if (!('Notification' in window)) return;
-    const result = await Notification.requestPermission();
-    setPermission(result);
-    if (result === 'granted') {
-      setSettings((s) => {
-        const updated = { ...s, enabled: true };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        return updated;
-      });
+    if (native) {
+      const refresh = () => {
+        checkNativePermission().then(setPermission);
+        hasExactAlarms().then(setExactAlarm);
+      };
+      refresh();
+      // Re-check when the user comes back from the system settings screen
+      const onVisible = () => { if (document.visibilityState === 'visible') refresh(); };
+      document.addEventListener('visibilitychange', onVisible);
+      return () => document.removeEventListener('visibilitychange', onVisible);
     }
-  }, []);
+    if ('Notification' in window) setPermission(Notification.permission);
+  }, [native]);
 
   const updateSettings = useCallback((patch: Partial<NotificationSettings>) => {
     setSettings((s) => {
@@ -44,9 +63,31 @@ export function useNotifications(prayers: PrayerTime[]) {
     });
   }, []);
 
-  // Schedule notifications for upcoming prayers
+  const requestPermission = useCallback(async () => {
+    let result: NotificationPermission;
+    if (native) {
+      result = await requestNativePermission();
+    } else {
+      if (!('Notification' in window)) return;
+      result = await Notification.requestPermission();
+    }
+    setPermission(result);
+    if (result === 'granted') updateSettings({ enabled: true });
+  }, [native, updateSettings]);
+
+  const fixExactAlarm = useCallback(async () => {
+    setExactAlarm(await openExactAlarmSettings());
+  }, []);
+
+  // Native app: let the OS fire the Adhan, even when the app is closed
   useEffect(() => {
-    if (!settings.enabled || permission !== 'granted' || !prayers.length) return;
+    if (!native || !coords || permission !== 'granted') return;
+    scheduleAdhan(coords, settings).catch((err) => console.warn('Adhan scheduling failed:', err));
+  }, [native, settings, permission, coords?.latitude, coords?.longitude]);
+
+  // Website: in-page reminders for upcoming prayers
+  useEffect(() => {
+    if (native || !settings.enabled || permission !== 'granted' || !prayers.length) return;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
     const now = Date.now();
@@ -68,7 +109,7 @@ export function useNotifications(prayers: PrayerTime[]) {
     }
 
     return () => timers.forEach(clearTimeout);
-  }, [settings, permission, prayers]);
+  }, [native, settings, permission, prayers]);
 
-  return { settings, permission, requestPermission, updateSettings };
+  return { settings, permission, requestPermission, updateSettings, native, exactAlarm, fixExactAlarm };
 }

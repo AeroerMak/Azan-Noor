@@ -32,6 +32,8 @@ function fromRow(row: Record<string, unknown>): Preferences {
       enabled: (row.notif_enabled as number) === 1,
       minutesBefore: (row.notif_minutes as number) ?? 10,
       soundEnabled: (row.sound_enabled as number) !== 0,
+      adhan: true,
+      reminder: false,
     },
     preferredMuezzin: (row.muezzin as string) ?? 'alafasy',
     favoriteDuas: JSON.parse((row.favorite_duas as string) ?? '[]'),

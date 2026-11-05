@@ -136,6 +136,8 @@ export interface NotificationSettings {
   enabled: boolean;
   minutesBefore: number;
   soundEnabled: boolean;
+  adhan: boolean;     // native app: play the Adhan at prayer time
+  reminder: boolean;  // native app: reminder `minutesBefore` each prayer
 }
 
 export type Theme = 'dark' | 'light';
