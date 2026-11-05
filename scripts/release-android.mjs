@@ -15,7 +15,7 @@ const keystore = process.env.AZANNOOR_KEYSTORE_PROPERTIES ?? join(homedir(), '.a
 statSync(keystore); // fail early: a release must be signed with the release key
 
 execSync('node scripts/build-mobile.mjs', { stdio: 'inherit' });
-execSync(process.platform === 'win32' ? 'gradlew.bat assembleRelease' : './gradlew assembleRelease', {
+execSync(process.platform === 'win32' ? '.\\gradlew.bat assembleRelease' : './gradlew assembleRelease', {
   cwd: 'android',
   stdio: 'inherit',
   env: { ...process.env, JAVA_HOME: javaHome },
