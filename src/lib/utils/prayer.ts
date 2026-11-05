@@ -1,6 +1,29 @@
-import type { PrayerTime, PrayerName, PrayerTimings } from '@/types';
+import { CalculationMethod, Coordinates as AdhanCoordinates, Madhab, PrayerTimes } from 'adhan';
+import type { PrayerTime, PrayerName, PrayerTimings, Coordinates } from '@/types';
 
 const DISPLAY_PRAYERS: PrayerName[] = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+
+// On-device calculation (Umm Al-Qura, Shafi Asr) — works offline and lets the
+// native app schedule the Adhan days ahead with the same times the screen shows.
+export function calculatePrayerTimes(coords: Coordinates, date: Date = new Date()): PrayerTime[] {
+  const params = CalculationMethod.UmmAlQura();
+  params.madhab = Madhab.Shafi;
+  const times = new PrayerTimes(new AdhanCoordinates(coords.latitude, coords.longitude), date, params);
+
+  const byName: Record<string, Date> = {
+    Fajr: times.fajr,
+    Dhuhr: times.dhuhr,
+    Asr: times.asr,
+    Maghrib: times.maghrib,
+    Isha: times.isha,
+  };
+
+  return DISPLAY_PRAYERS.map((name) => {
+    const t = byName[name];
+    const time = `${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`;
+    return { name, time, timestamp: t.getTime() };
+  });
+}
 
 export function parseTime(timeStr: string, baseDate: Date = new Date()): Date {
   // timeStr is "HH:MM" — may include timezone offset like "05:00 (+03)"
