@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.azannoor.app',
+  appId: 'app.azannoor',
   appName: 'Azan Noor',
   webDir: 'out',
   backgroundColor: '#030712',

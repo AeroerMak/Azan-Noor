@@ -1,4 +1,4 @@
-package com.azannoor.app;
+package app.azannoor;
 
 import com.getcapacitor.BridgeActivity;
 
