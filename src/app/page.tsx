@@ -168,7 +168,7 @@ export default function Home() {
 
         <footer className={`pt-8 lg:pt-0 pb-8 text-center text-white/20 text-xs ${panel('settings')}`}>
           <p>Azan Noor · نور الأذان</p>
-          <p className="mt-1">Prayer times via Aladhan API</p>
+          <p className="mt-1">Prayer times calculated on your device · Umm Al-Qura method</p>
         </footer>
       </div>
 
