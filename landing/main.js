@@ -47,10 +47,10 @@ fetch('/version.json', { cache: 'no-cache' })
 // Reveal sections as they scroll into view
 (function reveal() {
   const items = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    items.forEach((el) => el.classList.add('in'));
-    return;
-  }
+  if (!('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js');
+  // Safety net: never leave anything hidden for long
+  setTimeout(() => items.forEach((el) => el.classList.add('in')), 2500);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {

@@ -108,7 +108,7 @@ a { color: inherit; text-decoration: none; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
 .hero h1 { font-size: clamp(42px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.035em; margin-top: 22px; }
 .hero h1 em { font-style: normal; background: linear-gradient(90deg, #6ee7b7, #10b981 60%, #2dd4bf); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero .arabic { font-size: 30px; color: rgb(110 231 183 / 0.85); margin-top: 10px; }
+.hero .arabic { font-size: 30px; color: rgb(110 231 183 / 0.85); margin-top: 10px; text-align: left; }
 .hero .lede { font-size: 18px; color: var(--muted); max-width: 520px; margin-top: 18px; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .hero-note { margin-top: 16px; font-size: 13px; color: var(--faint); }
@@ -169,6 +169,7 @@ a { color: inherit; text-decoration: none; }
 .feature p { color: var(--muted); font-size: 15px; margin-top: 8px; }
 .feature.wide { grid-column: span 2; display: grid; grid-template-columns: auto 1fr; gap: 0 22px; align-items: start; }
 .feature.wide .ic { grid-row: span 2; }
+.feature.full { grid-column: 1 / -1; }
 .feature.wide h3 { margin-top: 0; }
 
 /* ── Screens ───────────────────────────────────────────────── */
@@ -232,17 +233,19 @@ footer { padding: 56px 0 calc(40px + env(safe-area-inset-bottom)); color: var(--
 .legal strong { color: var(--text); }
 
 /* ── Reveal on scroll ─────────────────────────────────────── */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* Only hidden once main.js has started (html.js), so content never depends on the script */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; gap: 24px; }
   .hero { padding-top: 48px; text-align: center; }
   .hero .lede { margin-left: auto; margin-right: auto; }
+  .hero .arabic { text-align: center; }
   .hero-cta, .trust { justify-content: center; }
   .features { grid-template-columns: 1fr 1fr; }
-  .feature.wide { grid-column: span 2; }
+  .feature.wide { grid-column: 1 / -1; }
   .downloads { grid-template-columns: 1fr; }
   .screens { grid-template-columns: repeat(4, 220px); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
   .screens figure { scroll-snap-align: center; }
